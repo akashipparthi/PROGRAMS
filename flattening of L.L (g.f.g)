@@ -1,0 +1,45 @@
+Node *flatten(Node *root)
+{
+   // Your code here
+   struct Node* ptr,*ptr1,*ptr2,*p;
+   p=ptr;
+   ptr=root;
+   ptr1=ptr->next;
+  while(p->next!=NULL)
+  { ptr2=merge(ptr,ptr1);
+   p=p->next->next;
+   ptr=p;
+   ptr1=ptr->next;
+  }
+   return ptr2;
+}
+   
+
+
+int merge(struct Node *L1,struct Node * L2) {
+  
+  // create new linked list pointer
+  var L3 = new Node(null, null);
+  var prev = L3;
+  
+  // while both linked lists are not empty
+  while (L1 != NULL && L2 != NULL) {
+    if (L1->data <= L2->data) { 
+      prev->next = L1;
+      L1 = L1->next;
+    } else {
+      prev->next = L2;
+      L2 = L2->next;
+    }
+    prev = prev->next;
+  }
+  
+  // once we reach end of a linked list, append the other 
+  // list because we know it is already sorted
+  if (L1 == NULL) { prev->next = L2; }
+  if (L2 == NULL) { prev->next = L1; }
+  
+  // return the sorted linked list
+  return L3->next;
+  
+}
